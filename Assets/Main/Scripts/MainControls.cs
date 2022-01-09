@@ -1,7 +1,6 @@
 using System.Linq;
 using LookingGlass;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 /**
  * Receives input from hardware buttons and alters parameters (such as focus and depthiness)
@@ -12,7 +11,6 @@ public class MainControls : MonoBehaviour {
 
   public Material frameMaterial;
   public Framer framer;
-  public VideoControls videoControls;
   public CornerMessage cornerMessage;
   public FrameTextures frameTextures;
 
@@ -20,14 +18,12 @@ public class MainControls : MonoBehaviour {
 
   private enum Parameter {
     FOCUS,
-    DEPTHINESS,
-    SEEK
+    DEPTHINESS
   }
 
   private readonly Parameter[] CYCLE_PARAMETERS = {
     Parameter.DEPTHINESS,
-    Parameter.FOCUS,
-    Parameter.SEEK
+    Parameter.FOCUS
   };
 
   private int cycleParameterIndex;
@@ -39,7 +35,7 @@ public class MainControls : MonoBehaviour {
     var focus = PlayerPrefs.GetFloat(Parameter.FOCUS.ToString(), 40);
     framer.TranslateFrame(focus);
 
-    var depthiness = PlayerPrefs.GetFloat(Parameter.DEPTHINESS.ToString(), 100);
+    var depthiness = PlayerPrefs.GetFloat(Parameter.DEPTHINESS.ToString(), 10000);
     frameMaterial.SetFloat(SHADER_DEPTHINESS, depthiness);
   }
 
@@ -52,27 +48,8 @@ public class MainControls : MonoBehaviour {
       CycleReceived();
     }
 
-    if (Input.GetKeyUp(KeyCode.Return)) {
-      CycleReceived();
-    }
-
-    if (Input.GetKeyUp(KeyCode.Space)) {
-      TogglePlayPause();
-    }
-
     if (Input.GetKeyUp(KeyCode.D)) {
       frameTextures.ToggleShowDepthAsMainTexture();
-    }
-
-    if (Input.GetKeyUp(KeyCode.Tab)) {
-      if (videoControls == null) {
-        return;
-      }
-      FilePicker.LoadVideoFile(videoControls);
-    }
-
-    if (Input.GetKeyUp(KeyCode.Escape)) {
-      SceneManager.LoadScene("MenuScene", LoadSceneMode.Single);
     }
   }
 
@@ -88,26 +65,18 @@ public class MainControls : MonoBehaviour {
     }
 
     if (Input.GetKey(KeyCode.RightArrow)) {
-      DirectionReceived(curParam, true);
-    }
-
-    if (Input.GetKey(KeyCode.LeftArrow)) {
-      DirectionReceived(curParam, false);
-    }
-
-    if (Input.GetKey(KeyCode.Keypad6)) {
       DirectionReceived(Parameter.DEPTHINESS, true);
     }
 
-    if (Input.GetKey(KeyCode.Keypad4)) {
+    if (Input.GetKey(KeyCode.LeftArrow)) {
       DirectionReceived(Parameter.DEPTHINESS, false);
     }
 
-    if (Input.GetKey(KeyCode.Keypad8) || Input.GetKey(KeyCode.UpArrow)) {
+    if (Input.GetKey(KeyCode.UpArrow)) {
       DirectionReceived(Parameter.FOCUS, true);
     }
 
-    if (Input.GetKey(KeyCode.Keypad2) || Input.GetKey(KeyCode.DownArrow)) {
+    if (Input.GetKey(KeyCode.DownArrow)) {
       DirectionReceived(Parameter.FOCUS, false);
     }
   }
@@ -127,9 +96,6 @@ public class MainControls : MonoBehaviour {
         break;
       case Parameter.DEPTHINESS:
         ChangeDepthiness(forward);
-        break;
-      case Parameter.SEEK:
-        SeekVideo(forward);
         break;
     }
   }
@@ -155,20 +121,6 @@ public class MainControls : MonoBehaviour {
     frameMaterial.SetFloat(SHADER_DEPTHINESS, newDepthiness);
     PlayerPrefs.SetFloat(Parameter.DEPTHINESS.ToString(), newDepthiness);
     ShowParameter(Parameter.DEPTHINESS, newDepthiness);
-  }
-
-  private void SeekVideo(bool forward) {
-    if (videoControls == null) {
-      return;
-    }
-    videoControls.Seek(forward);
-  }
-
-  private void TogglePlayPause() {
-    if (videoControls == null) {
-      return;
-    }
-    videoControls.TogglePlayPause();
   }
 
   private void ShowParameter(Parameter parameter, float? value) {
