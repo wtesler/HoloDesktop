@@ -1,0 +1,19 @@
+#pragma kernel CSMain
+
+struct MinMax {
+    uint min;
+    uint max;
+};
+
+RWStructuredBuffer<MinMax> buffer;
+
+Texture2D<float> DepthTexture;
+
+[numthreads(8,8,1)]
+void CSMain (uint2 pos : SV_DispatchThreadID) {
+    // We multiply by a large number here because we can't use floats.
+    // Then the consumer divides by the same large number to retrieve the real value.
+    float val = (uint) (DepthTexture[pos] * 100);
+    InterlockedMin(buffer[0].min, (uint) val);
+    InterlockedMax(buffer[0].max, (uint) val);
+}
