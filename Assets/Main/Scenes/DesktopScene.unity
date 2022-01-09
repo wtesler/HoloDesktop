@@ -259,6 +259,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 312522432316861685, guid: 7203f64f1a09a2747a42c511df0c96e4, type: 3}
+      propertyPath: frameMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 475fddddec146314684a164da94b6be3, type: 2}
+    - target: {fileID: 312522433266096034, guid: 7203f64f1a09a2747a42c511df0c96e4, type: 3}
+      propertyPath: frameTexture
+      value: 
+      objectReference: {fileID: 8400000, guid: b52603d31cad0af4f8906e9f6747a88a, type: 2}
+    - target: {fileID: 312522433266096034, guid: 7203f64f1a09a2747a42c511df0c96e4, type: 3}
+      propertyPath: frameMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 475fddddec146314684a164da94b6be3, type: 2}
+    - target: {fileID: 312522433266096034, guid: 7203f64f1a09a2747a42c511df0c96e4, type: 3}
+      propertyPath: frameDepthTexture
+      value: 
+      objectReference: {fileID: 8400000, guid: af22187c67bbe4141a681420d31cf739, type: 2}
     - target: {fileID: 418368655004767906, guid: 7203f64f1a09a2747a42c511df0c96e4, type: 3}
       propertyPath: quiltRT
       value: 

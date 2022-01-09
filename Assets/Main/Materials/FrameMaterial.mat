@@ -65,7 +65,7 @@ Material:
     - _BUILTIN_QueueOffset: 0
     - _BumpScale: 1
     - _Cutoff: 0.5
-    - _Depthiness: 0
+    - _Depthiness: 10000
     - _DepthinessStretch: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
