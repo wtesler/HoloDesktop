@@ -32,10 +32,10 @@ public class MainControls : MonoBehaviour {
   private void Start() {
     cycleParametersLength = CYCLE_PARAMETERS.Count();
 
-    var focus = PlayerPrefs.GetFloat(Parameter.FOCUS.ToString(), 40);
+    var focus = PlayerPrefs.GetFloat(Parameter.FOCUS.ToString(), -.35f);
     framer.TranslateFrame(focus);
 
-    var depthiness = PlayerPrefs.GetFloat(Parameter.DEPTHINESS.ToString(), 10000);
+    var depthiness = PlayerPrefs.GetFloat(Parameter.DEPTHINESS.ToString(), 11000);
     frameMaterial.SetFloat(SHADER_DEPTHINESS, depthiness);
   }
 
