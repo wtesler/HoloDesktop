@@ -10,6 +10,7 @@
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
+SignTool=MsSign $f
 AppId={{A1F51990-41BF-446E-9C7D-9679AA604694}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
