@@ -13,7 +13,7 @@ public class MainControls : MonoBehaviour {
   public Framer framer;
   public CornerMessage cornerMessage;
   public FrameTextures frameTextures;
-  public Vector2 depthRange = new Vector2(0, 30000);
+  public Vector2 depthRange = new Vector2(0, 60000);
 
   private static readonly int SHADER_DEPTHINESS = Shader.PropertyToID("_Depthiness");
 
