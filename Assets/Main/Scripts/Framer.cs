@@ -2,8 +2,12 @@ using LookingGlass;
 using UnityEngine;
 
 public class Framer : MonoBehaviour {
-  [Header("Scaling")] public float aspectRatio = 3 / 4f;
+  [Header("Scaling")]
+  public float aspectRatio = 3 / 4f;
   public Vector2 minMaxHeight;
+
+  [Header("Ranging")]
+  public Vector2 focusRange = new Vector2(-1.5f, 0);
 
   [Header("HoloPlay")] public Holoplay holoplay;
 
@@ -16,30 +20,16 @@ public class Framer : MonoBehaviour {
     var farExtent = holoplay.farClipFactor - MARGIN;
     var nearExtent = -holoplay.nearClipFactor + MARGIN;
 
-    p = new Vector3(p.x, p.y, Mathf.Clamp(p.z + amountToMove, nearExtent, farExtent));
+    var newZ = Mathf.Clamp(p.z + amountToMove, nearExtent, farExtent);
+    newZ = Mathf.Clamp(newZ, focusRange.x, focusRange.y);
+
+    p = new Vector3(p.x, p.y, newZ);
 
     t.position = p;
 
     Rescale();
 
     return p.z;
-  }
-
-  public void LerpFrame(float progress) {
-    var t = transform;
-    var p = t.position;
-
-    var nearExtent = -holoplay.nearClipFactor + MARGIN;
-    var farExtent = holoplay.farClipFactor - MARGIN;
-
-    var a = -.4f;
-    var b = .4f;
-
-    p = new Vector3(p.x, p.y, Mathf.Lerp(a, b, progress));
-
-    t.position = p;
-
-    Rescale();
   }
 
   private void Rescale() {

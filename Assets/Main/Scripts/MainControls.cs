@@ -13,6 +13,7 @@ public class MainControls : MonoBehaviour {
   public Framer framer;
   public CornerMessage cornerMessage;
   public FrameTextures frameTextures;
+  public Vector2 depthRange = new Vector2(0, 30000);
 
   private static readonly int SHADER_DEPTHINESS = Shader.PropertyToID("_Depthiness");
 
@@ -115,9 +116,7 @@ public class MainControls : MonoBehaviour {
     var amountToMove = depthinessSensitivity;
     amountToMove *= forward ? 1 : -1;
     var newDepthiness = curDepthiness + amountToMove;
-    if (newDepthiness < 0) {
-      newDepthiness = 0;
-    }
+    newDepthiness = Mathf.Clamp(newDepthiness, depthRange.x, depthRange.y);
     frameMaterial.SetFloat(SHADER_DEPTHINESS, newDepthiness);
     PlayerPrefs.SetFloat(Parameter.DEPTHINESS.ToString(), newDepthiness);
     ShowParameter(Parameter.DEPTHINESS, newDepthiness);
