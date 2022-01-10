@@ -50,15 +50,17 @@ public class HolifyDesktop : MonoBehaviour {
   private void OnRender(Texture2D inputTexture) {
     var inputWidth = inputTexture.width;
     var inputHeight = inputTexture.height;
-    var desiredWidth = (int) (frameTextures.GetAspectRatio() * inputHeight);
+    var desiredWidth = frameTextures.GetAspectRatio() * inputHeight;
 
     var frameTexture = frameTextures.GetFrameTexture();
     var frameDepthTexture = frameTextures.GetFrameDepthTexture();
 
-    var widthRatio = (float) desiredWidth / inputWidth;
+    var widthRatio = desiredWidth / inputWidth;
+
+    var offsetX = ((inputWidth - desiredWidth) / 2) / inputWidth;
 
     // Get the center of the desktop texture.
-    Graphics.Blit(inputTexture, frameTexture, new Vector2(widthRatio, 1), new Vector2(.25f, 0f));
+    Graphics.Blit(inputTexture, frameTexture, new Vector2(widthRatio, 1), new Vector2(offsetX, 0f));
 
     depthModel.InferDepth(frameTexture, frameDepthTexture);
   }
