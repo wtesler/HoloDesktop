@@ -49,7 +49,7 @@ public class MinMaxer {
     minMaxShader.Dispatch(0, textureWidth / THREAD_GROUP_X, textureHeight / THREAD_GROUP_Y, THREAD_GROUP_Z);
     minMaxBuffer.GetData(minMaxArr);
 
-    minMaxMaterial.SetFloat(MIN_VALUE, minMaxArr[0].min / 100f);
-    minMaxMaterial.SetFloat(MAX_VALUE, minMaxArr[0].max / 100f);
+    minMaxMaterial.SetFloat(MIN_VALUE, minMaxArr[0].min / 1000f);
+    minMaxMaterial.SetFloat(MAX_VALUE, minMaxArr[0].max / 1000f);
   }
 }

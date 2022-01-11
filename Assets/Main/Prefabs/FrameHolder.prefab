@@ -146,4 +146,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aspectRatio: 0.75
   minMaxHeight: {x: 0.8, y: 3.2}
+  focusRange: {x: -2, y: 0}
   holoplay: {fileID: 0}

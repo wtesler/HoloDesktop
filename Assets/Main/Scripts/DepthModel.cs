@@ -70,7 +70,7 @@ public class DepthModel : MonoBehaviour {
     // Determine the min/max value from the model output.
     minMaxer.ComputeMinMax(normalizeMaterial);
 
-    // Use the computed min/max to normalize the values between 0 and 1.
+    // Use the computed min/max to normalize the values between 0 and 1 (and potentially resize).
     Graphics.Blit(modelOutputTexture, dest, normalizeMaterial);
 
     onDepthInferred?.Invoke(dest);
