@@ -45,9 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   focusSensitivity: 0.02
-  depthinessSensitivity: 100000
+  depthinessSensitivity: 10000
+  startFocus: -0.35
+  startDepth: 1000000
+  depthRange: {x: 0, y: 2500000}
   frameMaterial: {fileID: 2100000, guid: 475fddddec146314684a164da94b6be3, type: 2}
   framer: {fileID: 0}
   cornerMessage: {fileID: 0}
   frameTextures: {fileID: 0}
-  depthRange: {x: 0, y: 25000000}

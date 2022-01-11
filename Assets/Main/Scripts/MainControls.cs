@@ -22,7 +22,8 @@ public class MainControls : MonoBehaviour {
 
   private enum Parameter {
     FOCUS,
-    DEPTHINESS
+    DEPTHINESS,
+    FPS,
   }
 
   private readonly Parameter[] CYCLE_PARAMETERS = {
@@ -98,9 +99,17 @@ public class MainControls : MonoBehaviour {
   }
 
   private void onRawKeyUp(RawKey key) {
-    if (isHoldingControl && key == RawKey.D) {
-      frameTextures.ToggleShowDepthAsMainTexture();
+    if (isHoldingControl) {
+      switch (key) {
+        case RawKey.D:
+          frameTextures.ToggleShowDepthAsMainTexture();
+          break;
+        case RawKey.F:
+          ShowParameter(Parameter.FPS, 1 / Time.deltaTime);
+          break;
+      }
     }
+
   }
 
   private void onRawKeyDown(RawKey key) {

@@ -4,7 +4,7 @@ Shader "Holo/NormalizeShader"
     {
         _MainTex ("Texture", 2D) = "red" {}
         _Min ("Min", float) = 0
-        _Max ("Max", float) = 0
+        _Diff ("Diff", float) = 0
     }
     SubShader
     {
@@ -31,25 +31,22 @@ Shader "Holo/NormalizeShader"
             };
 
             sampler2D _MainTex;
-            float4 _MainTex_ST;
+            // float _MainTex_ST;
 
             float _Min;
-            float _Max;
+            float _Diff;
 
             v2f vert (appdata v)
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+                o.uv = v.uv;
                 return o;
             }
 
             float frag (v2f i) : SV_Target
             {
-                float col = tex2D(_MainTex, i.uv); // Sample
-                col = (col - _Min) / (_Max - _Min); // Normalize
-                // col = 1 - col; // Invert
-                return col;
+                return (tex2D(_MainTex, i.uv) - _Min) / _Diff; // Normalize
             }
             ENDCG
         }

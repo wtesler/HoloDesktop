@@ -31,6 +31,7 @@ public class DepthModel : MonoBehaviour {
   // private RenderTexture srcTexture;
   private RenderTexture modelInputTexture;
   private RenderTexture modelOutputTexture;
+  private RenderTexture modelOutputQuarterTexture;
 
   private void Start() {
     loadMidasModel();
@@ -40,8 +41,9 @@ public class DepthModel : MonoBehaviour {
 
     modelInputTexture = new RenderTexture(dimens.x, dimens.y, 0, INPUT_TEXTURE_FORMAT, 0);
     modelOutputTexture = new RenderTexture(dimens.x, dimens.y, 0, OUTPUT_TEXTURE_FORMAT, 0);
+    modelOutputQuarterTexture = new RenderTexture(dimens.x / 4, dimens.y / 4, 0, OUTPUT_TEXTURE_FORMAT, 0);
 
-    minMaxer = new MinMaxer(modelOutputTexture, minMaxShader);
+    minMaxer = new MinMaxer(modelOutputQuarterTexture, minMaxShader);
   }
 
   private void OnDestroy() {
@@ -66,6 +68,8 @@ public class DepthModel : MonoBehaviour {
     // OUTPUT FROM MODEL TO OUTPUT TEXTURE
     Tensor output = modelWorker.PeekOutput();
     output.ToRenderTexture(modelOutputTexture);
+
+    Graphics.Blit(modelOutputTexture, modelOutputQuarterTexture);
 
     // Determine the min/max value from the model output.
     minMaxer.ComputeMinMax(normalizeMaterial);
