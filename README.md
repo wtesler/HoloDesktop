@@ -24,6 +24,8 @@ MiDaS 2 Small model is used for monocular depth perception.
 
 - The produced exe in the Installer folder is what is shared with consumers.
 
+- Then read the SIGNING.txt in Builds/Installer to learn how to sign the exe.
+
 ### Version Control
 
 #### Pull Changes
