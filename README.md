@@ -1,6 +1,6 @@
 # Holo Desktop
 
-Use AI to convert desktop content into holographic content for Looking Glass Portrait.
+Use AI to convert desktop content into holographic content for Looking Glass family of devics.
 
 ### Dependencies
 
